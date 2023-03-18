@@ -3,6 +3,7 @@ import * as React from "react";
 import { NextPage } from "next";
 import { useSelector, useDispatch } from "react-redux";
 // #endregion Global Imports
+// import "../global.css";
 
 // #region Local Imports
 import { withTranslation } from "@Server/i18n";
@@ -33,7 +34,7 @@ const Home: NextPage<IHomePage.IProps, IHomePage.InitialProps> = ({
         ));
 
     return (
-        <h1 className="text-3xl font-bold underline bg-red-500">
+        <h1 className="text-3xl text-red-700 font-bold underline bg-red-500">
             Hello world!
         </h1>
     );

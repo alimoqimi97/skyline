@@ -78,7 +78,7 @@ module.exports = plop => {
     actions: [
       {
         type: "add",
-        path: "pages/{{pascalCase name}}/index.tsx",
+        path: "pages/{{name}}/index.tsx",
         templateFile: "plop-templates/Page/Page.tsx.hbs",
       },
       {

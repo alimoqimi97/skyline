@@ -34,9 +34,14 @@ const Home: NextPage<IHomePage.IProps, IHomePage.InitialProps> = ({
         ));
 
     return (
-        <h1 className="text-3xl text-red-700 font-bold underline bg-red-500">
-            Hello world!
-        </h1>
+        <>
+            <button className="hello" type="button">
+                Hello world
+            </button>
+            <h1 className="text-3xl text-white font-bold underline bg-purple-600">
+                Hello world!
+            </h1>
+        </>
     );
 };
 

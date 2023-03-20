@@ -1,13 +1,10 @@
 import * as React from "react";
 import { NextPage } from "next";
-// import { useSelector, useDispatch } from "react-redux";
-
 import { withTranslation } from "@Server/i18n";
-// import { IStore } from "@Redux/IStore";
-// import { RegisterActions } from "@Actions";
 import { Heading, LocaleButton } from "@Components";
-
 import { IRegister, ReduxNextPageContext } from "@Interfaces";
+import Link from "next/link";
+import Image from "next/image";
 import styles from "./styles.module.scss";
 
 const Register: NextPage<IRegister.IProps, IRegister.InitialProps> = ({
@@ -31,15 +28,27 @@ const Register: NextPage<IRegister.IProps, IRegister.InitialProps> = ({
         <div className={styles.register}>
             {renderLocaleButtons(i18n.language)}
             <div className={styles.formWrapper}>
-                <span id="logi">Skyline</span>
-                <span id="title">Register</span>
+                <span id={styles.logo}>Skyline</span>
+                <span id={styles.title}>Register</span>
                 <form>
                     <input type="text" placeholder="Username" />
                     <input type="email" placeholder="Email" />
                     <input type="password" placeholder="Password" />
-                    <input type="file" />
-                    <button>Sign up</button>
+                    <input type="file" id={styles.file} />
+                    <label htmlFor={styles.file}>
+                        <Image
+                            src="/static/images/addProfile2.jpg"
+                            alt="add-profile-picture"
+                            width={20}
+                            height={20}
+                        />
+                    </label>
+                    <button type="submit">Sign up</button>
                 </form>
+                <p>
+                    You do have an acount? {"  "}
+                    <Link href="/login">Login</Link>{" "}
+                </p>
             </div>
         </div>
     );

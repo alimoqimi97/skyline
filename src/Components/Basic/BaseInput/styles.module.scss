@@ -1,0 +1,6 @@
+.BaseInput {
+    &::placeholder {
+        @apply text-smokeScreen;
+    }
+    @apply p-4 w-[250px] border-b-pastelBlue border-b rounded-lg;
+}

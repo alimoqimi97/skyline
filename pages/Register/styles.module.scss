@@ -4,7 +4,7 @@
         @apply bg-slate-200 py-5 px-16 rounded-lg flex flex-col gap-2 items-center shadow-2xl;
         form {
             @apply flex flex-col gap-4;
-            button {
+            .registerButton {
                 @apply bg-greekSea text-white p-3 font-bold cursor-pointer border-none rounded-lg shadow-2xl hover:bg-cyan-800 transition-all duration-200 ease-in-out;
             }
             label {

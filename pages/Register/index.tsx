@@ -6,7 +6,7 @@ import { IRegister, ReduxNextPageContext } from "@Interfaces";
 import Link from "next/link";
 import Image from "next/image";
 import styles from "./styles.module.scss";
-import { BaseInput } from "@Components/Basic";
+import { BaseButton, BaseInput } from "@Components/Basic";
 
 const Register: NextPage<IRegister.IProps, IRegister.InitialProps> = ({
     // t,
@@ -45,7 +45,9 @@ const Register: NextPage<IRegister.IProps, IRegister.InitialProps> = ({
                         />
                         Add profile picture.
                     </label>
-                    <button type="submit">Sign up</button>
+                    <BaseButton className={styles.registerButton} type="submit">
+                        Sign up{" "}
+                    </BaseButton>
                 </form>
                 <p>
                     You do have an acount? {"  "}

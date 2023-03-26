@@ -3,13 +3,13 @@ import * as React from "react";
 import { NextPage } from "next";
 import { useSelector, useDispatch } from "react-redux";
 // #endregion Global Imports
-// import "../global.css";
 
 // #region Local Imports
 import { withTranslation } from "@Server/i18n";
 import { IStore } from "@Redux/IStore";
 import { HomeActions } from "@Actions";
-import { Heading, LocaleButton } from "@Components";
+import { Chatbox, Heading, LocaleButton, Sidebar } from "@Components";
+import styles from "./styles.module.scss";
 // #endregion Local Imports
 
 // #region Interface Imports
@@ -17,7 +17,7 @@ import { IHomePage } from "@Interfaces";
 // #endregion Interface Imports
 
 const Home: NextPage<IHomePage.IProps, IHomePage.InitialProps> = ({
-    t,
+    // t,
     i18n,
 }) => {
     // const home = useSelector((state: IStore) => state.home);
@@ -34,14 +34,12 @@ const Home: NextPage<IHomePage.IProps, IHomePage.InitialProps> = ({
         ));
 
     return (
-        <>
-            <button className="hello" type="button">
-                Hello world
-            </button>
-            <h1 className="text-3xl text-white font-bold underline bg-purple-600">
-                Hello world!
-            </h1>
-        </>
+        <div className={styles.home}>
+            <div className={styles.container}>
+                <Sidebar />
+                <Chatbox />
+            </div>
+        </div>
     );
 };
 

@@ -5,8 +5,8 @@ import { Heading, LocaleButton } from "@Components";
 import { IRegister, ReduxNextPageContext } from "@Interfaces";
 import Link from "next/link";
 import Image from "next/image";
-import styles from "./styles.module.scss";
 import { BaseButton, BaseInput } from "@Components/Basic";
+import styles from "./styles.module.scss";
 
 const Register: NextPage<IRegister.IProps, IRegister.InitialProps> = ({
     // t,

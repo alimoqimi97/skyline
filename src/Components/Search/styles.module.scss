@@ -1,3 +1,18 @@
-.Search{
-    
+.Search {
+    @apply border-b border-b-slate-300 border-solid;
+    .searchForm {
+        @apply p-2;
+    }
+    .searchInput {
+        @apply bg-transparent w-full border-none text-white outline-none #{!important};
+        &::placeholder {
+            @apply text-slate-400;
+        }
+    }
+    .userChat {
+        @apply flex p-[10px] transition-all ease-in-out duration-200 items-center gap-[10px] text-white cursor-pointer;
+        &:hover {
+            @apply bg-purpleNoir;
+        }
+    }
 }

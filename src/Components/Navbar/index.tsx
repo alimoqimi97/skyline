@@ -12,12 +12,13 @@ export const Navbar: FC<NavbarProps> = props => {
             <div className={styles.user}>
                 <Image
                     src="/static/images/addProfile2.jpg"
-                    width={50}
-                    height={50}
+                    width={24}
+                    height={24}
                     alt="avatar"
+                    className="bg-nostalgiaPerfume rounded-full object-cover"
                 />
                 <span>John</span>
-                <BaseButton>Logout</BaseButton>
+                <BaseButton className={styles.logout}>Logout</BaseButton>
             </div>
         </div>
     );

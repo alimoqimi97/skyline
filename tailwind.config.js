@@ -23,7 +23,8 @@ module.exports = {
         smokeScreen: "#afafaf",
         greekSea: "#7b96ec",
         stormIsComing: "#3e3c61",
-        purpleNoir: "#2f2d52"
+        purpleNoir: "#2f2d52",
+        nostalgiaPerfume: "#ddddf7",
       },
     },
   },

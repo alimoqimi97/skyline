@@ -1,0 +1,9 @@
+.Navbar{
+    @apply flex justify-between pl-3 items-center;
+    .user {
+        @apply flex items-center bg-purpleNoir h-12 justify-between;
+    }
+    #logo {
+
+    }
+}

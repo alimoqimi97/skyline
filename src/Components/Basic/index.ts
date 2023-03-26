@@ -1,2 +1,3 @@
 /* ADD_BASIC_COMPONENT_EXPORT_HERE */
-export { Button } from "./Button";
+export { BaseButton } from "./BaseButton";
+export { BaseInput } from "./BaseInput";

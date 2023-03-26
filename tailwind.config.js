@@ -6,7 +6,26 @@ module.exports = {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        transparent: "transparent",
+        current: "currentColor",
+        white: "#ffffff",
+        purple: "#3f3cbb",
+        midnight: "#121063",
+        metal: "#565584",
+        tahiti: "#3ab7bf",
+        silver: "#ecebff",
+        bubbleGum: "#ff77e9",
+        bermuda: "#78dcca",
+        pastelBlue: "#a7bcff",
+        colossus: "#5d5b8d",
+        smokeScreen: "#afafaf",
+        greekSea: "#7b96ec",
+        stormIsComing: "#3e3c61",
+        purpleNoir: "#2f2d52"
+      },
+    },
   },
   plugins: [],
 };

@@ -3,6 +3,8 @@ export * from "@Interfaces/Pages/Home";
 export * from "@Interfaces/Pages/App";
 export * from "@Interfaces/Pages/Error";
 /* ADD_PAGE_INTERFACE_EXPORT_HERE */
+export * from "@Interfaces/Pages/Register";
+export * from "@Interfaces/Pages/Login";
 // #endregion Page Interfaces
 
 // #region Redux Interfaces

@@ -1,0 +1,6 @@
+.home {
+    @apply bg-pastelBlue h-screen flex justify-center items-center;
+    .container {
+        @apply border border-solid border-white rounded-lg w-[65%] h-4/5 flex overflow-hidden;
+    }
+}

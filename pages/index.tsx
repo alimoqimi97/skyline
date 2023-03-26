@@ -8,7 +8,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { withTranslation } from "@Server/i18n";
 import { IStore } from "@Redux/IStore";
 import { HomeActions } from "@Actions";
-import { Heading, LocaleButton } from "@Components";
+import { Chatbox, Heading, LocaleButton, Sidebar } from "@Components";
+import styles from "./styles.module.scss";
 // #endregion Local Imports
 
 // #region Interface Imports
@@ -16,7 +17,7 @@ import { IHomePage } from "@Interfaces";
 // #endregion Interface Imports
 
 const Home: NextPage<IHomePage.IProps, IHomePage.InitialProps> = ({
-    t,
+    // t,
     i18n,
 }) => {
     // const home = useSelector((state: IStore) => state.home);
@@ -32,7 +33,14 @@ const Home: NextPage<IHomePage.IProps, IHomePage.InitialProps> = ({
             />
         ));
 
-    return <div>Hello world!</div>;
+    return (
+        <div className={styles.home}>
+            <div className={styles.container}>
+                <Sidebar />
+                <Chatbox />
+            </div>
+        </div>
+    );
 };
 
 Home.getInitialProps = async (): // ctx: ReduxNextPageContext

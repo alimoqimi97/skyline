@@ -36,7 +36,7 @@ Users should be able to:
 
 ### Links
 
-- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+- Live Site URL: [demo](https://your-live-site-url.com)
 
 ## My process
 
@@ -52,7 +52,7 @@ Users should be able to:
 
 ### What I learned
 
-In this chat app, I learned how to use firebase to sign in with gmail, email, facebook account and etc. using typescript in next.js app. how to use tailwind with sass. 
+In this chat app, I learned how to use firebase to sign in with gmail, email, facebook account and etc. how to send and receive messages in realtime wat. using typescript in next.js app. how to use tailwind with sass. 
 
 <!-- To see how you can add code snippets, see below:
 
@@ -77,10 +77,11 @@ Some features will add to skyline in the future is:
 - Voice call.
 - Creating channels.
 - Creating groups.
+- Account management section.
 
 
 ## Author
 
-- Gmail - [Ali Moghimi](alimoqimi97@gmail.com)
-- Linkedin - [Ali Moghimi](https://www.linkedin.com/in/ali-moghimi-842464174/)
+- Gmail: alimoqimi97@gmail.com
+- Linkedin: [Ali Moghimi](https://www.linkedin.com/in/ali-moghimi-842464174/)
 

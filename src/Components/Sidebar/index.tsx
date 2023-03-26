@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import { Chats, Navbar, Search } from "..";
 import styles from "./styles.module.scss";
 

@@ -1,4 +1,6 @@
 /* ADD_COMPONENT_EXPORT_HERE */
+export { Input } from "@Components/Input";
+export { Messages } from "@Components/Messages";
 export { MessageTextInput } from "@Components/MessageTextInput";
 export { Message } from "@Components/Message";
 export { Chats } from "@Components/Chats";

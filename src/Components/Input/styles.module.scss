@@ -1,0 +1,23 @@
+.Input{
+    @apply h-12 bg-white flex items-center justify-center p-[10px];
+    
+    .messageInput {
+        @apply w-full border-none outline-none text-purpleNoir text-lg p-0;
+        &::placeholder {
+            @apply text-slate-400;
+        }
+    }
+    .sendBox {
+        @apply flex items-center gap-2;
+        svg {
+            @apply w-5 h-6 cursor-pointer text-slate-400 hover:bg-slate-300 rounded-full;
+        }
+        .send {
+            @apply border-none py-1 px-3 text-white rounded-[4px] bg-blue-400;
+            svg {
+                @apply text-white w-5 hover:bg-transparent;
+            }
+        }
+    }
+
+}

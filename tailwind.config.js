@@ -25,6 +25,7 @@ module.exports = {
         stormIsComing: "#3e3c61",
         purpleNoir: "#2f2d52",
         nostalgiaPerfume: "#ddddf7",
+        kittensEye: "#8da4f1",
       },
     },
   },

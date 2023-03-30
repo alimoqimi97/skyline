@@ -1,8 +1,8 @@
 import { FC } from "react";
-import Image from "next/image";
 import { BsFillCameraVideoFill } from "react-icons/bs";
 import { AiOutlinePlus } from "react-icons/ai";
 import { FiMoreHorizontal } from "react-icons/fi";
+import { Input, Messages } from "..";
 import styles from "./styles.module.scss";
 
 export interface ChatboxProps {}
@@ -18,6 +18,8 @@ export const Chatbox: FC<ChatboxProps> = props => {
                     <FiMoreHorizontal />
                 </div>
             </div>
+            <Messages />
+            <Input />
         </div>
     );
 };

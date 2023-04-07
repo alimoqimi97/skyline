@@ -1,3 +1,12 @@
 .Chatbox{
-    @apply flex-[2_2_0%];
+    @apply flex-[2_2_0%] flex flex-col relative;
+    .chatInfo {
+        @apply h-12 bg-colossus flex justify-between items-center p-[10px] text-slate-100;
+        .chatIcons {
+            @apply flex justify-between w-[70px];
+            svg {
+                @apply cursor-pointer h-6;
+            }
+        }
+    }
 }

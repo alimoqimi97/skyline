@@ -2,6 +2,7 @@
 import * as React from "react";
 import { NextPage } from "next";
 import { useSelector, useDispatch } from "react-redux";
+import { Auth } from "@supabase/auth-ui-react";
 // #endregion Global Imports
 
 // #region Local Imports
@@ -9,11 +10,12 @@ import { withTranslation } from "@Server/i18n";
 import { IStore } from "@Redux/IStore";
 import { HomeActions } from "@Actions";
 import { Chatbox, Heading, LocaleButton, Sidebar } from "@Components";
+import { IHomePage } from "@Interfaces";
 import styles from "./styles.module.scss";
 // #endregion Local Imports
 
 // #region Interface Imports
-import { IHomePage } from "@Interfaces";
+import { supabase } from "../lib/supabaseClient";
 // #endregion Interface Imports
 
 const Home: NextPage<IHomePage.IProps, IHomePage.InitialProps> = ({
@@ -22,6 +24,15 @@ const Home: NextPage<IHomePage.IProps, IHomePage.InitialProps> = ({
 }) => {
     // const home = useSelector((state: IStore) => state.home);
     // const dispatch = useDispatch();
+
+    React.useEffect(() => {
+        async function fetchData() {
+            let { data, error } = await supabase.from("Users").select();
+
+            console.log(data);
+        }
+        fetchData();
+    });
 
     const renderLocaleButtons = (activeLanguage: string) =>
         ["en", "es", "tr"].map(lang => (
@@ -35,23 +46,27 @@ const Home: NextPage<IHomePage.IProps, IHomePage.InitialProps> = ({
 
     return (
         <div className={styles.home}>
-            <div className={styles.container}>
-                <Sidebar />
-                <Chatbox />
-            </div>
+           
         </div>
     );
 };
 
 Home.getInitialProps = async (): // ctx: ReduxNextPageContext
 Promise<IHomePage.InitialProps> => {
-    // await ctx.store.dispatch(
-    //     HomeActions.GetApod({
-    //         params: { hd: true },
-    //     })
-    // );
     return { namespacesRequired: ["common"] };
 };
+
+// export async function getServerSideProps() {
+//     const { data } = await supabase.from("Users").select();
+
+//     console.log(data);
+
+//     return {
+//         props: {
+//             users: data,
+//         },
+//     };
+// }
 
 const Extended = withTranslation("common")(Home);
 

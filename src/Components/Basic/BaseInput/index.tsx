@@ -11,6 +11,7 @@ export const BaseInput: FC<BaseInputProps> = ({
     type,
     placeholder,
     className,
+    id,
     ...otherProps
 }) => {
     const inputClassName: string = `${styles.BaseInput} ${className}`;

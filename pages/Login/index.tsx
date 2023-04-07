@@ -1,16 +1,12 @@
-import * as React from "react";
 import { NextPage } from "next";
-import Image from "next/image";
 import Link from "next/link";
-// import { useSelector, useDispatch } from "react-redux";
-
 import { withTranslation } from "@Server/i18n";
-// import { IStore } from "@Redux/IStore";
-// import { LoginActions } from "@Actions";
-import { Heading, LocaleButton } from "@Components";
-
 import { ILogin, ReduxNextPageContext } from "@Interfaces";
 import { BaseButton, BaseInput } from "@Components/Basic";
+import { useState } from "react";
+import { supabase } from "lib/supabaseClient";
+import { useRouter } from "next/router";
+import Cookies from "js-cookie";
 import styles from "./styles.module.scss";
 
 const Login: NextPage<ILogin.IProps, ILogin.InitialProps> = ({
@@ -19,28 +15,53 @@ const Login: NextPage<ILogin.IProps, ILogin.InitialProps> = ({
 }) => {
     // const Login = useSelector((state: IStore) => state.Login);
     // const dispatch = useDispatch();
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [email, setEmail] = useState<string>("");
+    const [password, setPassword] = useState<string>("");
+    const router = useRouter();
 
-    const renderLocaleButtons = (activeLanguage: string) =>
-        ["en", "es", "tr"].map(lang => (
-            <LocaleButton
-                key={lang}
-                lang={lang}
-                isActive={activeLanguage === lang}
-                onClick={() => i18n.changeLanguage(lang)}
-            />
-        ));
+    const handleLogin = async event => {
+        event.preventDefault();
+
+        setIsLoading(true);
+        const { data, error } = await supabase.auth.signInWithPassword({
+            email,
+            password,
+        });
+
+        if (error) {
+            alert(error.message);
+        } else {
+            console.log(data);
+
+            Cookies.set("token", data?.session?.access_token, {
+                expires: (data?.session?.expires_in ?? 60) / 60,
+            });
+            router.push("/chatroom");
+        }
+        setIsLoading(false);
+    };
 
     return (
         <div className={styles.login}>
-            {renderLocaleButtons(i18n.language)}
             <div className={styles.formWrapper}>
                 <span id={styles.logo}>Skyline</span>
                 <span id={styles.title}>Register</span>
-                <form>
-                    <BaseInput type="email" placeholder="Email" />
-                    <BaseInput type="password" placeholder="Password" />
+                <form onSubmit={handleLogin}>
+                    <BaseInput
+                        value={email}
+                        required
+                        onChange={e => setEmail(e.target.value)}
+                        type="email"
+                        placeholder="Email"
+                    />
+                    <BaseInput
+                        type="password"
+                        placeholder="Password"
+                        onChange={evt => setPassword(evt?.target?.value)}
+                    />
                     <BaseButton className={styles.registerButton} type="submit">
-                        Login{" "}
+                        {!isLoading ? <>Login </> : <>Loading...</>}
                     </BaseButton>
                 </form>
                 <p>

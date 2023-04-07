@@ -1,3 +1,12 @@
-.Search{
-    
+.Search {
+    @apply border-b border-b-slate-300 border-solid;
+    .searchForm {
+        @apply p-2;
+    }
+    .searchInput {
+        @apply bg-transparent w-full border-none text-white outline-none #{!important};
+        &::placeholder {
+            @apply text-slate-400;
+        }
+    }
 }

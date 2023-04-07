@@ -7,7 +7,7 @@ export interface MessagesProps {}
 export const Messages: FC<MessagesProps> = props => {
     return (
         <div className={styles.Messages} data-testid="Messages">
-            <Message />
+            <Message isOwner />
             <Message />
             <Message />
             <Message />

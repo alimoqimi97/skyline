@@ -1,11 +1,22 @@
+import { FC } from "react";
 import { BaseButton } from "@Components/Basic";
 import Image from "next/image";
-import React, { FC } from "react";
+import { supabase } from "lib/supabaseClient";
+import { useRouter } from "next/router";
 import styles from "./styles.module.scss";
 
 export interface NavbarProps {}
 
 export const Navbar: FC<NavbarProps> = props => {
+    const router = useRouter();
+    const handleLogout = async () => {
+        const { error } = await supabase.auth.signOut();
+        if (error) {
+            alert(error.error_description || error.message);
+        } else {
+            router.push("/login");
+        }
+    };
     return (
         <div className={styles.Navbar} data-testid="Navbar">
             <span id={styles.logo}>Skyline</span>
@@ -18,7 +29,9 @@ export const Navbar: FC<NavbarProps> = props => {
                     className="bg-nostalgiaPerfume rounded-full object-cover"
                 />
                 <span>John</span>
-                <BaseButton className={styles.logout}>Logout</BaseButton>
+                <BaseButton onClick={handleLogout} className={styles.logout}>
+                    Logout
+                </BaseButton>
             </div>
         </div>
     );

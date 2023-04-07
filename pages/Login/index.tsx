@@ -33,9 +33,11 @@ const Login: NextPage<ILogin.IProps, ILogin.InitialProps> = ({
             alert(error.message);
         } else {
             console.log(data);
+            console.log((data?.session?.expires_in ?? 60) / (3600 * 2));
+            
 
             Cookies.set("token", data?.session?.access_token, {
-                expires: (data?.session?.expires_in ?? 60) / 60,
+                expires: (data?.session?.expires_in ?? 60) / (3600 * 24),
             });
             router.push("/chatroom");
         }

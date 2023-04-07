@@ -3,6 +3,7 @@ import { BaseButton } from "@Components/Basic";
 import Image from "next/image";
 import { supabase } from "lib/supabaseClient";
 import { useRouter } from "next/router";
+import Cookies from "js-cookie";
 import styles from "./styles.module.scss";
 
 export interface NavbarProps {}
@@ -14,6 +15,7 @@ export const Navbar: FC<NavbarProps> = props => {
         if (error) {
             alert(error.error_description || error.message);
         } else {
+            Cookies.remove("token");
             router.push("/login");
         }
     };

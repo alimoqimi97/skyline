@@ -1,51 +1,81 @@
-import { FC } from "react";
-import Image from "next/image";
+import { FC, useEffect, useState } from "react";
+import { supabase } from "lib/supabaseClient";
+import { Contact } from "..";
 import styles from "./styles.module.scss";
 
 export interface ChatsProps {}
 
 export const Chats: FC<ChatsProps> = props => {
+    const [chats, setChats] = useState<any[]>([]);
+    const [isLoading, setIsLoading] = useState<boolean>(true);
+
+    useEffect(() => {
+        const fetchChats = async () => {
+            const { data, error } = await supabase.from("inboxes").select("*");
+
+            if (!error) {
+                setChats(data);
+                setIsLoading(false);
+            } else {
+                alert(error?.message);
+            }
+        };
+
+        fetchChats();
+    }, []);
+
+    const handleContactClick = async (inboxId: string) => {
+        if (!inboxId) {
+            return;
+        }
+
+        const { data, error } = await supabase
+            .from("messages")
+            .select("*")
+            ?.eq("inbox_id", inboxId);
+
+        if (!error) {
+            setChats(data);
+            setIsLoading(false);
+        } else {
+            alert(error?.message);
+        }
+    };
     return (
         <div className={styles.Chats} data-testid="Chats">
-            <div className={styles.userChat}>
-                <Image
-                    width={50}
-                    height={50}
-                    src="/static/images/addProfile2.jpg"
-                    alt="picture"
-                    className="rounded-full object-cover"
-                />
-                <div className={styles.userChatInfo}>
-                    <span>Jane</span>
-                    <p>Due</p>
-                </div>
-            </div>
-            <div className={styles.userChat}>
-                <Image
-                    width={50}
-                    height={50}
-                    src="/static/images/addProfile2.jpg"
-                    alt="picture"
-                    className="rounded-full object-cover"
-                />
-                <div className={styles.userChatInfo}>
-                    <span>Jane</span>
-                    <p>Due</p>
-                </div>
-            </div>
-            <div className={styles.userChat}>
-                <Image
-                    width={50}
-                    height={50}
-                    src="/static/images/addProfile2.jpg"
-                    alt="picture"
-                    className="rounded-full object-cover"
-                />
-                <div className={styles.userChatInfo}>
-                    <span>Jane</span>
-                    <p>Due</p>
-                </div>
-            </div>
+            {chats &&
+                chats?.length > 0 &&
+                chats?.map(
+                    (chat: {
+                        id?: string;
+                        fullName?: string;
+                        last_message?: string;
+                        user_id?: string;
+                        contact_id?: string;
+                    }) => (
+                        <Contact
+                            fullName={chat?.fullName}
+                            lastMessage={chat?.last_message}
+                            image="/static/images/addProfile2.jpg"
+                            onClick={() => handleContactClick(chat?.id ?? "")}
+                        />
+                    )
+                )}
+            {/* <Contact
+                fullName="Jane"
+                lastMessage="Hello World!"
+                image="/static/images/addProfile2.jpg"
+            />
+            <Contact
+                fullName="Jane"
+                lastMessage="Hello World!"
+                image="/static/images/addProfile2.jpg"
+            />
+            <Contact
+                fullName="Jane"
+                lastMessage="Hello World!"
+                image="/static/images/addProfile2.jpg"
+            /> */}
         </div>
     );
 };

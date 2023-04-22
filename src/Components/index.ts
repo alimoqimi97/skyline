@@ -1,4 +1,5 @@
 /* ADD_COMPONENT_EXPORT_HERE */
+export { Contact } from "@Components/Contact";
 export { Input } from "@Components/Input";
 export { Messages } from "@Components/Messages";
 export { MessageTextInput } from "@Components/MessageTextInput";

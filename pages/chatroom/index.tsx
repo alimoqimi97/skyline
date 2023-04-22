@@ -5,6 +5,8 @@ import { Sidebar } from "@Components/Sidebar";
 import { Chatbox } from "@Components/Chatbox";
 import styles from "./styles.module.scss";
 
+
+
 const Chatroom: NextPage<IChatroom.IProps, IChatroom.InitialProps> = () => {
     return (
         <div className={styles.chatroom}>

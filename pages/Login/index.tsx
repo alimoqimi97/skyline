@@ -32,13 +32,10 @@ const Login: NextPage<ILogin.IProps, ILogin.InitialProps> = ({
         if (error) {
             alert(error.message);
         } else {
-            console.log(data);
-            console.log((data?.session?.expires_in ?? 60) / (3600 * 2));
-            
-
             Cookies.set("token", data?.session?.access_token, {
                 expires: (data?.session?.expires_in ?? 60) / (3600 * 24),
             });
+            Cookies.set("user_id", data?.session?.user?.id);
             router.push("/chatroom");
         }
         setIsLoading(false);
@@ -48,7 +45,7 @@ const Login: NextPage<ILogin.IProps, ILogin.InitialProps> = ({
         <div className={styles.login}>
             <div className={styles.formWrapper}>
                 <span id={styles.logo}>Skyline</span>
-                <span id={styles.title}>Register</span>
+                <span id={styles.title}>Login</span>
                 <form onSubmit={handleLogin}>
                     <BaseInput
                         value={email}

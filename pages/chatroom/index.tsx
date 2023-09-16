@@ -1,20 +1,26 @@
 import { NextPage } from "next";
 import { withTranslation } from "@Server/i18n";
 import { IChatroom } from "@Interfaces";
-import { Sidebar } from "@Components/Sidebar";
-import { Chatbox } from "@Components/Chatbox";
+import dynamic from "next/dynamic";
+import { ChatRoomProvider } from "src/context/useChatroomContext";
+import { Loading } from "@Components/Loading";
 import styles from "./styles.module.scss";
 
-
+const ChatRoomContainer = dynamic(
+    () => import("src/containers/chatroom/chatroom-container"),
+    {
+        loading: () => <Loading />,
+        ssr: false,
+    }
+);
 
 const Chatroom: NextPage<IChatroom.IProps, IChatroom.InitialProps> = () => {
     return (
-        <div className={styles.chatroom}>
-            <div className={styles.container}>
-                <Sidebar />
-                <Chatbox />
+        <ChatRoomProvider>
+            <div className={styles.chatroom}>
+                <ChatRoomContainer />
             </div>
-        </div>
+        </ChatRoomProvider>
     );
 };
 

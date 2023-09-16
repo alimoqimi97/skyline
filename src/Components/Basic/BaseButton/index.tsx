@@ -1,26 +1,30 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import styles from "./styles.module.scss";
 
 export interface BaseButtonProps {
-    type?: "button" | "submit" | "reset";
     className?: string;
-    onClick?: () => void
+    onClick?: () => void;
+    shape?: "normal" | "outline";
+    isDisabled?: boolean;
 }
 
-export const BaseButton: FC<BaseButtonProps> = (
-    {className, type , children, onClick} = {
-        text: "button",
-        className: "",
-        type: "button",
-    }
-) => {
-    const buttonClassname: string = `${styles.BaseButton} ${className}`;
+export const BaseButton: FC<BaseButtonProps> = ({
+    className = "",
+    children,
+    onClick,
+    shape = "normal",
+    isDisabled = false,
+}) => {
+    const buttonClassname: string = `${styles.BaseButton} ${styles[shape]} ${
+        isDisabled ? styles.disabled : ""
+    } ${className}`;
     return (
         <button
-            type={type}
+            type="button"
             className={buttonClassname}
             data-testid="BaseButton"
             onClick={onClick}
+            disabled={isDisabled}
         >
             {children}
         </button>

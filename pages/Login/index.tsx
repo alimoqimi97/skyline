@@ -1,7 +1,7 @@
 import { NextPage } from "next";
 import Link from "next/link";
 import { withTranslation } from "@Server/i18n";
-import { ILogin, ReduxNextPageContext } from "@Interfaces";
+import { ILogin } from "@Interfaces";
 import { BaseButton, BaseInput } from "@Components/Basic";
 import { useState } from "react";
 import { supabase } from "lib/supabaseClient";
@@ -9,18 +9,13 @@ import { useRouter } from "next/router";
 import Cookies from "js-cookie";
 import styles from "./styles.module.scss";
 
-const Login: NextPage<ILogin.IProps, ILogin.InitialProps> = ({
-    // t,
-    i18n,
-}) => {
-    // const Login = useSelector((state: IStore) => state.Login);
-    // const dispatch = useDispatch();
+const Login: NextPage<ILogin.IProps, ILogin.InitialProps> = () => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const router = useRouter();
 
-    const handleLogin = async event => {
+    const handleLogin = async (event: any) => {
         event.preventDefault();
 
         setIsLoading(true);
@@ -57,29 +52,22 @@ const Login: NextPage<ILogin.IProps, ILogin.InitialProps> = ({
                     <BaseInput
                         type="password"
                         placeholder="Password"
-                        onChange={evt => setPassword(evt?.target?.value)}
+                        onChange={(evt: any) => setPassword(evt?.target?.value)}
                     />
                     <BaseButton className={styles.registerButton} type="submit">
                         {!isLoading ? <>Login </> : <>Loading...</>}
                     </BaseButton>
                 </form>
                 <p>
-                    You do not have an acount? {"  "}
-                    <Link href="/register">Register</Link>{" "}
+                    You do not have an acount?
+                    <Link href="/register">Register</Link>
                 </p>
             </div>
         </div>
     );
 };
 
-Login.getInitialProps = async (
-    ctx: ReduxNextPageContext
-): Promise<ILogin.InitialProps> => {
-    // await ctx.store.dispatch(
-    //     LoginActions.GetApod({
-    //         params: { hd: true },
-    //     })
-    // );
+Login.getInitialProps = async (): Promise<ILogin.InitialProps> => {
     return { namespacesRequired: ["common"] };
 };
 

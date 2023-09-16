@@ -1,5 +1,6 @@
 import { FC, useEffect, useState } from "react";
 import { supabase } from "lib/supabaseClient";
+import { useChatroomContext } from "src/context/useChatroomContext";
 import { Contact } from "..";
 import styles from "./styles.module.scss";
 
@@ -8,6 +9,7 @@ export interface ChatsProps {}
 export const Chats: FC<ChatsProps> = props => {
     const [chats, setChats] = useState<any[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(true);
+    const { setMessages } = useChatroomContext();
 
     useEffect(() => {
         const fetchChats = async () => {
@@ -35,7 +37,7 @@ export const Chats: FC<ChatsProps> = props => {
             ?.eq("inbox_id", inboxId);
 
         if (!error) {
-            setChats(data);
+            setMessages(data);
             setIsLoading(false);
         } else {
             alert(error?.message);

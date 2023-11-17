@@ -1,11 +1,24 @@
 import { FC, useEffect, useState } from "react";
 import { Chatbox } from "@Components/Chatbox";
+import { supabase, useRealtime } from "lib/supabaseClient";
+import { RealtimePostgresChangesPayload } from "@supabase/supabase-js";
 import { Sidebar } from "@Components/Sidebar";
 import Cookies from "js-cookie";
-import { supabase } from "lib/supabaseClient";
+import { useChatroomContext } from "src/context/useChatroomContext";
+import { MessageType } from "src/types.ts";
 import styles from "./styles.module.scss";
 
 const ChatroomContainer: FC = () => {
+    const { setMessages } = useChatroomContext();
+
+    useRealtime(
+        (payload: RealtimePostgresChangesPayload<{ [key: string]: any }>) => {
+            setMessages?.([
+                payload?.old as MessageType,
+                payload?.new as MessageType,
+            ]);
+        }
+    );
     const [userId, setUserId] = useState<string>("");
     const [inboxes, setInboxes] = useState<any[]>([]);
 

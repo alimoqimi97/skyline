@@ -1,4 +1,8 @@
-import { createClient } from "@supabase/supabase-js";
+import { useEffect } from "react";
+import {
+    RealtimePostgresChangesPayload,
+    createClient,
+} from "@supabase/supabase-js";
 
 export const supabase = createClient(
     "https://fbstdnwaepfzffscoktn.supabase.co",
@@ -14,15 +18,27 @@ export const supabase = createClient(
     - *
 */
 
-const channel = supabase
-    .channel("table-db-changes")
-    .on(
-        "postgres_changes",
-        {
-            event: "*",
-            schema: "public",
-            table: "messages",
-        },
-        payload => console.log(payload)
-    )
-    .subscribe();
+export const useRealtime = (
+    callback: (
+        payload: RealtimePostgresChangesPayload<{ [key: string]: any }>
+    ) => void
+) => {
+    useEffect(() => {
+        const channel = supabase
+            .channel("table-db-changes")
+            .on(
+                "postgres_changes",
+                {
+                    event: "*",
+                    schema: "public",
+                    table: "messages",
+                },
+                payload => callback?.(payload)
+            )
+            .subscribe();
+
+        return () => {
+            supabase?.removeChannel(channel);
+        };
+    }, [callback]);
+};

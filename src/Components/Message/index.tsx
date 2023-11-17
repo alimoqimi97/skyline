@@ -1,12 +1,13 @@
-import { FC } from "react";
+import { FC, ReactNode } from "react";
 import Image from "next/image";
 import styles from "./styles.module.scss";
 
 export interface MessageProps {
     isOwner?: boolean;
+    children?: ReactNode;
 }
 
-export const Message: FC<MessageProps> = ({ isOwner }) => {
+export const Message: FC<MessageProps> = ({ isOwner, children }) => {
     return (
         <div
             className={`${styles.Message} ${isOwner ? styles.owner : ""}`}
@@ -23,7 +24,7 @@ export const Message: FC<MessageProps> = ({ isOwner }) => {
                 <span>Just now</span>
             </div>
             <div id={styles.content}>
-                <p>hello</p>
+                <p>{children}</p>
                 {/* <Image
                     width={40}
                     height={40}

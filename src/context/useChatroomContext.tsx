@@ -1,16 +1,9 @@
-import {
-    FC,
-    createContext,
-    useState,
-    useMemo,
-    useContext,
-    SetStateAction,
-    Dispatch,
-} from "react";
+import { FC, createContext, useState, useMemo, useContext } from "react";
+import { MessageType } from "src/types.ts";
 
 export interface IChatroomContext {
-    messages: any[];
-    setMessages: Dispatch<SetStateAction<any[]>>;
+    messages?: MessageType[];
+    setMessages?: (messages: MessageType[]) => void;
 }
 
 const chatRoomContextInitialValue = {
@@ -22,7 +15,7 @@ const ChatroomContext = createContext<IChatroomContext>(
     chatRoomContextInitialValue
 );
 
-const initialValue = {
+const initialValue: IChatroomContext = {
     messages: [],
     setMessages: () => {},
 };
@@ -43,7 +36,7 @@ export const ChatRoomProvider: FC = ({ children }) => {
             ...state,
             setMessages,
         }),
-        []
+        [state]
     );
 
     return (

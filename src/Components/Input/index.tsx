@@ -24,9 +24,7 @@ export const Input: FC<InputProps> = () => {
         if (error) {
             console.error("error in sending message...");
         } else {
-            console.log('sent');
-            
-            setMessage("")
+            setMessage("");
         }
     };
     return (

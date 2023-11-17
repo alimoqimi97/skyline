@@ -1,5 +1,4 @@
 // #region Global Imports
-import * as React from "react";
 import App, { AppInitialProps, AppContext } from "next/app";
 import { Provider } from "react-redux";
 import withRedux from "next-redux-wrapper";

@@ -8,6 +8,7 @@ import { ChangeEvent, SyntheticEvent, useState } from "react";
 import { supabase } from "lib/supabaseClient";
 import { useRouter } from "next/router";
 import styles from "./styles.module.scss";
+import Cookies from "js-cookie";
 
 const Register: NextPage<IRegister.IProps, IRegister.InitialProps> = ({
     // t,
@@ -20,16 +21,19 @@ const Register: NextPage<IRegister.IProps, IRegister.InitialProps> = ({
     const [phone, setPhone] = useState("");
     const router = useRouter();
 
-    const handleSubmit = async (event: SyntheticEvent) => {
-        event?.preventDefault();
+    const handleSubmit = async () => {
         const { data, error } = await supabase.auth.signUp({
             email,
             password,
             phone,
         });
+
+        console.log(data);
+
         if (error) {
             console.error(error?.message);
         } else {
+            Cookies.set("user_id", data?.user?.id ?? "");
             console.log("User created successfully");
             router.push("/chatroom");
         }
@@ -40,7 +44,7 @@ const Register: NextPage<IRegister.IProps, IRegister.InitialProps> = ({
             <div className={styles.formWrapper}>
                 <span id={styles.logo}>Skyline</span>
                 <span id={styles.title}>Register</span>
-                <form onSubmit={handleSubmit}>
+                <form>
                     <BaseInput
                         type="text"
                         placeholder="Phone Number"
@@ -56,7 +60,7 @@ const Register: NextPage<IRegister.IProps, IRegister.InitialProps> = ({
                     <BaseInput
                         type="password"
                         placeholder="Password"
-                        onChange={e => setPassword(e.target.value)}
+                        onChange={(e: any) => setPassword(e.target.value)}
                     />
                     <label htmlFor={styles.file}>
                         <input type="file" id={styles.file} />
@@ -68,7 +72,10 @@ const Register: NextPage<IRegister.IProps, IRegister.InitialProps> = ({
                         />
                         Add profile picture.
                     </label>
-                    <BaseButton className={styles.registerButton} type="submit">
+                    <BaseButton
+                        className={styles.registerButton}
+                        onClick={handleSubmit}
+                    >
                         Sign up{" "}
                     </BaseButton>
                 </form>
